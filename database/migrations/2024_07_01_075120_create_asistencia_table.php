@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('asistencia', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('fecha')->default(DB::raw('CURRENT_TIMESTAMP'))->format('Y-m-d');
+            $table->date('fecha');
             $table->time('hora_entrada');
             $table->integer('estudiante_id')->unsigned();
             $table->integer('grupo_id')->unsigned();

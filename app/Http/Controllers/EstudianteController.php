@@ -44,8 +44,7 @@ class EstudianteController extends Controller
     public function show($id)
     {
         $estudiante = Estudiante::find($id);
-
-        if (!$estudiante) {
+        if(!$estudiante){
             return abort(404);
         }
 

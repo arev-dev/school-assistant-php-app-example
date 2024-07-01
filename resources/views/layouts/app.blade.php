@@ -60,6 +60,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Estudiantes
                             </a>
+                            <a class="nav-link" href="{{ route('asistencias.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
+                                Asistencias
+                            </a>
                             <a class="nav-link" href="{{ route('grupos.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Grupos
@@ -67,6 +71,10 @@
                             <a class="nav-link" href="{{ route('docentes_grupos.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Docentes Grupos
+                            </a>
+                            <a class="nav-link" href="{{ route('estudiantes_grupos.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Estudiantes Grupos
                             </a>
                         @endif
                     </div>

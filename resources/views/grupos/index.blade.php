@@ -17,8 +17,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <button type="submit" class="btn btn-info">Buscar</button> &nbsp;
-                <a href="{{ route('grupos.create') }}" class="btn btn-outline-primary">Nuevo grupo</a>
+                <button type="submit" class="btn btn-primary m-2">Buscar</button> &nbsp;
+                <a href="{{ route('grupos.create') }}" class="btn btn-success">Nuevo grupo</a>
             </div>
         </div>
     </form>

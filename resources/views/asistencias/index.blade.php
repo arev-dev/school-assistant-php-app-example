@@ -12,7 +12,7 @@
         @csrf
         <div class="row">
             <div class="col-sm-4">
-                <label for="asistencia_id" class="form-label">Estudiante</label>
+                <label for="asistencia_id" class="form-label">Fecha de Asistencia</label>
                 <select name="asistencia_id" class="form-control">
                     <option value="">Seleccione una fecha</option>
                     @foreach ($asistencias as $a)
@@ -23,8 +23,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <button type="submit" class="btn btn-info">Buscar</button> &nbsp;
-                <a href="{{ route('asistencias.create') }}" class="btn btn-outline-primary">Nueva asistencia</a>
+                <button type="submit" class="btn btn-primary m-2">Buscar</button> &nbsp;
+                <a href="{{ route('asistencias.create') }}" class="btn btn-success">Nueva asistencia</a>
             </div>
         </div>
     </form>

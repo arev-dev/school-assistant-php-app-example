@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grupo;
+use App\Models\DocenteGrupo;
+use App\Models\Asistencia;
+use App\Models\EstudianteGrupo;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GrupoController extends Controller
 {
@@ -84,12 +89,26 @@ class GrupoController extends Controller
     /* Acción que recibe la confirmación y elimina el registro en la bd */
     public function destroy($id)
     {
-        $grupo = Grupo::find($id);
-        if(!$grupo){
-            return abort(404);
-        }
+        DB::beginTransaction();
 
-        $grupo->delete();
-        return redirect()->route('grupos.index')->with('success', 'Grupo eliminado correctamente');
+        try {
+            $grupo = Grupo::find($id);
+
+            if (!$grupo) {
+                return abort(404);
+            }
+
+            Asistencia::where('grupo_id', $grupo->id)->delete();
+            DocenteGrupo::where('grupo_id', $grupo->id)->delete();
+            EstudianteGrupo::where('grupo_id', $grupo->id)->delete();
+            $grupo->delete();
+            DB::commit();
+
+            return redirect()->route('grupos.index')->with('success', 'Grupo eliminado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->route('grupos.index')->with('danger', 'No se pudo eliminar el grupo');
+        }
     }
 }

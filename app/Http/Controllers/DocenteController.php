@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Docente;
+use App\Models\DocenteGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DocenteController extends Controller
 {
@@ -95,15 +97,27 @@ class DocenteController extends Controller
     /* Acción que Elimina el recurso especificado del almacenamiento. */
     public function destroy($id)
     {
-        $docente = Docente::find($id);
+        DB::beginTransaction();
 
-        if (!$docente) {
-            return abort(404);
+        try {
+            $docente = Docente::find($id);
+
+            if (!$docente) {
+                return abort(404);
+            }
+
+            DocenteGrupo::where('docente_id', $docente->id)->delete();
+            $docente->delete();
+            DB::commit();
+
+            return redirect()->route('docentes.index')->with('success', 'Docente eliminado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->route('docentes.index')->withErrors([
+                'error' => 'Ha ocurrido un error al eliminar al docente.',
+            ]);
         }
-
-        $docente->delete();
-
-        return redirect()->route('docentes.index')->with('success', 'Docente eliminado correctamente.');
     }
 
     /* Acción que muestra la vista del formulario de inicio de sesión del docente */

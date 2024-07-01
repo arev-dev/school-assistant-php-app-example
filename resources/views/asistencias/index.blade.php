@@ -33,6 +33,7 @@
         <thead>
             <tr>
                 <th>Estudiante</th>
+                <th>Grupo</th>
                 <th>Fecha</th>
                 <th>Hora de Entrada</th>
                 <th>Acciones</th>
@@ -43,6 +44,7 @@
             @foreach ($asistencias as $item)
                 <tr>
                     <td>{{ $item->estudiante->nombre }} {{ $item->estudiante->apellido }}</td>
+                    <td>{{ $item->grupo->nombre }}</td>
                     <td>{{ $item->fecha }}</td>
                     <td>{{ $item->hora_entrada }}</td>
                     <td>

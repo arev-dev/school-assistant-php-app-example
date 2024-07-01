@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Asistencia;
+use App\Models\EstudianteGrupo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EstudianteController extends Controller
 {
@@ -94,15 +96,29 @@ class EstudianteController extends Controller
     /* Acción que Elimina el recurso especificado del almacenamiento. */
     public function destroy($id)
     {
-        $estudiante = Estudiante::find($id);
+        DB::beginTransaction();
 
-        if (!$estudiante) {
-            return abort(404);
+        try {
+            $estudiante = Estudiante::find($id);
+
+            if (!$estudiante) {
+                return abort(404);
+            }
+
+            Asistencia::where('estudiante_id', $estudiante->id)->delete();
+            EstudianteGrupo::where('estudiante_id', $estudiante->id)->delete();
+            $estudiante->delete();
+
+            DB::commit();
+
+            return redirect()->route('estudiantes.index')->with('success', 'Estudiante eliminado correctamente.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return redirect()->route('estudiantes.index')->withErrors([
+                'error' => 'Ha ocurrido un error al eliminar al estudiante.',
+            ]);
         }
-
-        $estudiante->delete();
-
-        return redirect()->route('estudiantes.index')->with('success', 'Estudiante eliminado correctamente.');
     }
 
 

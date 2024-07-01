@@ -21,14 +21,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <label for="pin" class="form-label">PIN</label>
-            <input type="text" name="pin" id="pin" class="form-control" value="{{ $estudiante->pin }}">
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('estudiantes.index') }}">Regresar</a>
+            <a href="{{ route('estudiantes.index') }}" class="btn btn-primary p-2 m-2">Regresar</a>
         </div>
     </div>
 @endsection

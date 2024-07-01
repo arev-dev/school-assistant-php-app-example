@@ -23,12 +23,6 @@
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="pin" class="form-label">PIN</label>
-            <input type="password" class="form-control" id="pin" name="pin" required>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-md-12">

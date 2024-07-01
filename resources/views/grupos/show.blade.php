@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ route('grupos.index') }}">Regresar</a>
+            <a href="{{ route('grupos.index') }}" class="btn btn-primary p-2 m-2">Regresar</a>
         </div>
     </div>
 @endsection
